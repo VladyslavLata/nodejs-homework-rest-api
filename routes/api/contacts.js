@@ -11,7 +11,7 @@ router.get("/:contactId", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  res.json({ message: "template message 23444555555555555" });
+  res.json({ message: "template message 23444" });
 });
 
 router.delete("/:contactId", async (req, res, next) => {
