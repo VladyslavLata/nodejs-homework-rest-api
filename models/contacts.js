@@ -2,7 +2,7 @@ const fs = require("fs/promises");
 const { nanoid } = require("nanoid");
 const path = require("path");
 
-const contactsPath = path.join(__dirname, "models", "contacts.json");
+const contactsPath = path.join(__dirname, "contacts.json");
 
 const listContacts = async () => {
   const contacts = await fs.readFile(contactsPath, "utf-8");
