@@ -1,6 +1,7 @@
 const express = require("express");
-const logger = require("morgan");
+const logger = require("morgan"); // просто виводить информацію в сонсоль як console.log
 const cors = require("cors");
+require("dotenv").config(); // додає змінні оточення в process.env з файлу .env
 
 const contactsRouter = require("./routes/api/contacts");
 
@@ -21,11 +22,6 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   const { status = 500, message = "Server error" } = err;
   res.status(status).json({ message });
-  // const { status = 500 } = err;
-  // if (status >= 500) {
-  //   err.message = "Server error";
-  // }
-  // res.status(status).json({ message: err.message });
 });
 
 module.exports = app;

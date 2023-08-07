@@ -1,5 +1,18 @@
-const app = require('./app')
+const mongoos = require("mongoose"); // для підключення до mongobd
 
-app.listen(3000, () => {
-  console.log("Server running. Use our API on port: 3000")
-})
+const app = require("./app");
+
+const { DB_HOST } = process.env;
+
+mongoos.set("strictQuery", true);
+
+mongoos
+  .connect(DB_HOST)
+  .then(() => {
+    app.listen(3000);
+    console.log("connect success!");
+  })
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });
