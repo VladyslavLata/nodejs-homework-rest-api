@@ -3,6 +3,7 @@ const Joi = require("joi");
 
 const { handleMongoosError } = require("../utils");
 
+// для прикладів нижче
 // const genreList = ["fantastic", "love"];
 // const dateFormat = /^\d{2}-d{2}-d{4}/; // регулярний вираз як приклад, він не правильний для дати.
 
@@ -20,11 +21,11 @@ const contactSchema = new Schema(
       type: String, // для збереження номера телефона в потрібному форматі потрібен регулярний вираз
       require: true,
     },
+    favorite: {
+      type: Boolean,
+      default: false,
+    },
     // -------ПРИКЛАДИ ВАЛІДАЦІЇ----------
-    // favorite: {
-    //   type: Boolean,
-    //   default: false,
-    // },
     // genre: {
     //   type: String,
     //   enum: genreList,
@@ -47,15 +48,19 @@ const addSchemeContacts = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
   phone: Joi.string().required(),
+  favorite: Joi.boolean(),
   // ------ПРИКЛАДИ ВАЛІДАЦІЇ------
-  // favorite: Joi.boolean(),
   // genre: Joi.string(),
   //   .validate(...genreList)
   //   .require(),
   // date: Joi.string().pattern(dateFormat).required(),
 });
 
-const schemas = { addSchemeContacts };
+const addSchemeFavorite = Joi.object({
+  favorite: Joi.boolean().required(),
+});
+
+const schemas = { addSchemeContacts, addSchemeFavorite };
 
 module.exports = {
   Contact,

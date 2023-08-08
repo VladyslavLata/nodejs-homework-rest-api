@@ -7,7 +7,6 @@ const {
   removeContactById,
   updateContactById,
 } = require("../../controllers/contacts");
-// const schemeContacts = require("../../schemas/contacts");
 const { schemas } = require("../../models/contact");
 const { validateBody, isValidid } = require("../../middleware");
 
@@ -26,6 +25,13 @@ router.put(
   updateContactById
 );
 
-// router.delete("/:contactId", isValidid,  removeContactById);
+router.patch(
+  "/:contactId/favorite",
+  isValidid,
+  validateBody(schemas.addSchemeFavorite),
+  updateContactById
+);
+
+router.delete("/:contactId", isValidid, removeContactById);
 
 module.exports = router;

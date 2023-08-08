@@ -1,4 +1,3 @@
-// const contacts = require("../models/contacts");
 const { Contact } = require("../models/contact");
 
 const { HttpError, controllerWrapper } = require("../utils");
@@ -46,22 +45,22 @@ const updateContactById = async (req, res, next) => {
   res.json(result);
 };
 
-// const removeContactById = async (req, res, next) => {
-//   const { contactId } = req.params;
-//   const result = await contacts.removeContact(contactId);
-//   if (!result) {
-//     throw HttpError(404, "Not found");
-//   }
-//   res.json(result);
-//   // якщо треба повернути статус 204 , то в такому випадку тіло відповіді не повертається.
-//   // з 204 статусом тіло відповіді просто не відправиться.
-//   //  можна написати таке: res.status(204).send();
-// };
+const removeContactById = async (req, res, next) => {
+  const { contactId } = req.params;
+  const result = await Contact.findByIdAndRemove(contactId);
+  if (!result) {
+    throw HttpError(404, "Not found");
+  }
+  res.json(result);
+  // якщо треба повернути статус 204 , то в такому випадку тіло відповіді не повертається.
+  // з 204 статусом тіло відповіді просто не відправиться.
+  //  можна написати таке: res.status(204).send();
+};
 
 module.exports = {
   getAllContacts: controllerWrapper(getAllContacts),
   getOneContactById: controllerWrapper(getOneContactById),
   addNewContact: controllerWrapper(addNewContact),
   updateContactById: controllerWrapper(updateContactById),
-  // removeContactById: controllerWrapper(removeContactById),
+  removeContactById: controllerWrapper(removeContactById),
 };
