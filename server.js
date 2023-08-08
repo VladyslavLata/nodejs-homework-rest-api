@@ -1,12 +1,12 @@
-const mongoos = require("mongoose"); // для підключення до mongobd
+const mongoose = require("mongoose"); // для підключення до mongobd
 
 const app = require("./app");
 
 const { DB_HOST } = process.env;
 
-mongoos.set("strictQuery", true);
+mongoose.set("strictQuery", true);
 
-mongoos
+mongoose
   .connect(DB_HOST)
   .then(() => {
     app.listen(3000);
