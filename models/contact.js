@@ -11,19 +11,24 @@ const contactSchema = new Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     email: {
       type: String,
-      require: true,
+      required: true,
     },
     phone: {
       type: String, // для збереження номера телефона в потрібному форматі потрібен регулярний вираз
-      require: true,
+      required: true,
     },
     favorite: {
       type: Boolean,
       default: false,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
     },
     // -------ПРИКЛАДИ ВАЛІДАЦІЇ----------
     // genre: {
