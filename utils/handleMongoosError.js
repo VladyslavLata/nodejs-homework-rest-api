@@ -1,5 +1,7 @@
 const handleMongoosError = (error, data, next) => {
-  error.status = 400;
+  const { code, name } = error;
+  const statusCode = code === 11000 && name === "MongoServerError" ? 409 : 400;
+  error.status = statusCode;
   next();
 };
 
